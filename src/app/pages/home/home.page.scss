@@ -71,17 +71,15 @@
   }
 }
 
-// Tasks Container
-.tasks-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.list-container {
+  overflow-y: auto;
+  height: 85%;
 }
 
 // Progress Container
 .progress-container {
   position: fixed;
-  bottom: 80px;
+  bottom: 60px;
   left: 1rem;
   right: 1rem;
   background: var(--ion-background-color);
@@ -98,18 +96,6 @@
   opacity: 0.7;
 }
 
-.custom-progress {
-  --progress-background: #e2e8f0;
-  --buffer-background: #e2e8f0;
-  height: 8px;
-  border-radius: 4px;
-  
-  &::part(progress) {
-    background: linear-gradient(90deg, #2563eb 0%, #4338ca 100%);
-    border-radius: 4px;
-  }
-}
-
 // FAB
 .custom-fab {
   --background: var(--primary-blue);
@@ -117,27 +103,14 @@
 }
 
 // Modal Styles
-.modal-toolbar {
-  --background: var(--primary-blue);
+ion-modal#formModal {
+  --width: fit-content;
+  --min-width: 80%;
+  --height: fit-content;
+  --min-height: 20%;
+  --border-radius: 3%;
 }
 
-.modal-content {
-  --background: white;
-}
-
-.form-container {
-  padding: 1rem;
-}
-
-.form-item {
-  --background: transparent;
-  --border-color: #e2e8f0;
-  --highlight-color-focused: #2563eb;
-  margin-bottom: 1rem;
-  
-  ion-label {
-    color: #374151;
-    font-weight: 600;
-    font-size: 0.875rem;
-  }
+.formcontent{
+  padding: 0.5rem;
 }

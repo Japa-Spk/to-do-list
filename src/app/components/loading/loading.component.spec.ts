@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { TaskCardComponent } from './task-card.component';
+import { LoadingComponent } from './loading.component';
 
-describe('TaskCardComponent', () => {
-  let component: TaskCardComponent;
-  let fixture: ComponentFixture<TaskCardComponent>;
+describe('LoadingComponent', () => {
+  let component: LoadingComponent;
+  let fixture: ComponentFixture<LoadingComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [IonicModule.forRoot(), TaskCardComponent]
+      imports: [IonicModule.forRoot(), LoadingComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TaskCardComponent);
+    fixture = TestBed.createComponent(LoadingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

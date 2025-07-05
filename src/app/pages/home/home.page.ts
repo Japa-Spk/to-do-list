@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 //Modules
 import { CommonModule } from "@angular/common"
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 //Ionic
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonProgressBar, IonFabButton, IonModal, IonLabel, IonItem, IonFab, IonButtons, IonInput } from '@ionic/angular/standalone';
+import { IonHeader, IonFooter, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonProgressBar, IonFabButton, IonModal, IonLabel, IonItem, IonFab, IonButtons, IonInput } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { ellipseOutline, checkmarkCircle, trashOutline, add, close } from 'ionicons/icons';
 //Components
 import { TaskCardComponent } from 'src/app/components/task-card/task-card.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
 //Models
 import { Task } from 'src/app/models/task.model';
 //Services
 import { TaskService } from 'src/app/services/task.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +20,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['home.page.scss'],
   imports: [
     CommonModule, ReactiveFormsModule,
-    TaskCardComponent,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonButtons, IonFab, IonFabButton, IonProgressBar, IonModal, IonLabel, IonItem, IonInput
+    TaskCardComponent, LoadingComponent,
+    IonHeader, IonFooter, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonButtons, IonFab, IonFabButton, IonProgressBar, IonModal, IonLabel, IonItem, IonInput
   ],
 })
 export class HomePage implements OnInit {
