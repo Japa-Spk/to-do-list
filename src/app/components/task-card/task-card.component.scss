@@ -1,0 +1,56 @@
+//Task Cards
+.task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+// Checkbox Button
+.checkbox-btn {
+    --color: var(--ion-color-medium);
+
+    &.checked {
+        --color: var(--primary-blue);
+    }
+}
+
+// Task Info
+.task-info {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.25rem 0;
+    transition: all 0.2s ease;
+
+    &.completed {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+}
+
+.task-date {
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+// Delete Button
+.delete-btn {
+    --color: #94a3b8;
+    --color-hover: #ef4444;
+    margin: 0;
+    padding: 0.5rem;
+    min-height: auto;
+    height: auto;
+
+    ion-icon {
+        font-size: 1rem;
+    }
+}
+
+.delete-btn:hover {
+    --color: var(--ion-color-danger);
+}

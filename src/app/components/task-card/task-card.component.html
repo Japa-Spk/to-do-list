@@ -1,0 +1,22 @@
+<ion-card [class.completed]="task.completed">
+  <ion-card-content>
+    <div class="task-row">
+      <ion-button fill="clear" size="small" class="checkbox-btn" [class.checked]="task.completed"
+        (click)="toggleTask(task.id)">
+        <ion-icon [name]="task.completed ? 'checkmark-circle' : 'ellipse-outline'" slot="icon-only">
+        </ion-icon>
+      </ion-button>
+      <div class="task-info">
+        <p class="task-title" [class.completed]="task.completed">
+          {{ task.title }}
+        </p>
+        <p class="task-date">
+          {{ formatDate(task.createdAt) }}
+        </p>
+      </div>
+      <ion-button fill="clear" size="small" class="delete-btn" (click)="deleteTask(task.id)">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
