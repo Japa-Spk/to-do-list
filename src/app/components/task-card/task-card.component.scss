@@ -36,21 +36,3 @@
     font-size: 0.75rem;
     opacity: 0.5;
 }
-
-// Delete Button
-.delete-btn {
-    --color: #94a3b8;
-    --color-hover: #ef4444;
-    margin: 0;
-    padding: 0.5rem;
-    min-height: auto;
-    height: auto;
-
-    ion-icon {
-        font-size: 1rem;
-    }
-}
-
-.delete-btn:hover {
-    --color: var(--ion-color-danger);
-}

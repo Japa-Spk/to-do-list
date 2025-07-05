@@ -7,11 +7,14 @@
         completadas' }}
       </p>
     </div>
+    <ion-button slot="end" color="translucent" (click)="goToCategories()">
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" [scrollY]="false" class="main-content">
   @if(loading){
-    <app-loading></app-loading>
+    <app-loading message="Cargando tareas..."></app-loading>
   }
   @else{
     <!-- Empty State -->

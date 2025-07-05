@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 //Modules
 import { CommonModule } from "@angular/common"
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 //Ionic
-import { IonHeader, IonFooter, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonProgressBar, IonFabButton, IonModal, IonLabel, IonItem, IonFab, IonButtons, IonInput } from '@ionic/angular/standalone';
+import { IonHeader, IonFooter, IonToolbar, IonTitle, IonContent, IonIcon, IonButton, IonProgressBar, IonFabButton, IonModal, IonLabel, IonItem, IonFab, IonButtons, IonInput, IonNavLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { ellipseOutline, checkmarkCircle, trashOutline, add, close } from 'ionicons/icons';
+import { ellipseOutline, checkmarkCircle, trashOutline, add, close, settingsOutline } from 'ionicons/icons';
 //Components
 import { TaskCardComponent } from 'src/app/components/task-card/task-card.component';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { CategoriesComponent } from '../categories/categories.component';
 //Models
 import { Task } from 'src/app/models/task.model';
 //Services
@@ -39,12 +41,13 @@ export class HomePage implements OnInit {
   constructor(
     private taskService: TaskService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.taskForm = this.formBuilder.group({
       title: ["", [Validators.required, Validators.minLength(1)]]
     })
     addIcons({
-      ellipseOutline, checkmarkCircle, trashOutline, add, close
+      ellipseOutline, checkmarkCircle, trashOutline, add, close, settingsOutline
     });
   }
 
@@ -89,5 +92,9 @@ export class HomePage implements OnInit {
 
   deleteTask(id: string) {
     this.taskService.deleteTask(id)
+  }
+
+  goToCategories() {
+    this.router.navigate(["/categories"])
   }
 }
