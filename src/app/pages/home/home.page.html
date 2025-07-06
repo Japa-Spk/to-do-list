@@ -27,11 +27,27 @@
       <p>Toca el botón + para agregar tu primera tarea</p>
     </div>
     }
+      <!-- Category Filters -->
+  <div class="category-filters">
+    <ion-chip 
+      [color]="(selectedCategoryFilter$ | async) === 'all' ? 'primary' : 'medium'"
+      (click)="selectCategoryFilter('all')">
+      <ion-label>Todas ({{ totalCount }})</ion-label>
+    </ion-chip>
+    
+    <ion-chip 
+      *ngFor="let category of categories"
+      [color]="(selectedCategoryFilter$ | async) === category.id ? 'primary' : 'medium'"
+      (click)="selectCategoryFilter(category.id)">
+      <div class="category-dot" [style.background-color]="category.color"></div>
+      <ion-label>{{ category.name }} ({{ (getTaskCountByCategory(category.id) | async) }})</ion-label>
+    </ion-chip>
+  </div>
     <!-- Tasks List -->
     @if(tasks.length > 0){
       <div class="list-container">
       @for(task of tasks; track task.id) {
-      <app-task-card [task]="task" (toggle)="toggleTask($event)" (delete)="deleteTask($event)"></app-task-card>
+      <app-task-card [task]="task" [category]="getCategory(task.categoryId)" (toggle)="toggleTask($event)" (delete)="deleteTask($event)"></app-task-card>
       }
       </div>
     }
@@ -73,6 +89,15 @@
               <ion-label position="stacked">Título *</ion-label>
               <ion-input formControlName="title" placeholder="¿Qué necesitas hacer?">
               </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-select label="Categorias" placeholder="Sin categoria" formControlName="categoryId">
+                @for(categoria of categories; track categoria.id) {
+                  <ion-select-option [value]="categoria.id">
+                    {{ categoria.name }}
+                  </ion-select-option>
+                }
+              </ion-select>
             </ion-item>
           </form>
         </div>
