@@ -37,20 +37,22 @@
     opacity: 0.5;
 }
 
-// Delete Button
-.delete-btn {
-    --color: #94a3b8;
-    --color-hover: #ef4444;
-    margin: 0;
-    padding: 0.5rem;
-    min-height: auto;
-    height: auto;
-
-    ion-icon {
-        font-size: 1rem;
-    }
+//Category
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
 }
 
-.delete-btn:hover {
-    --color: var(--ion-color-danger);
+.category-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+.category-title {
+    font-size: 0.82rem;
 }

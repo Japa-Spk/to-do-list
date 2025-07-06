@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <div class="custom-title">
+      <h1>Categorias</h1>
+      <p>
+        Gestiona tus categorias de tareas
+      </p>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" [scrollY]="false" class="main-content">
+  @if(loading){
+  <app-loading message="Cargando categorias..."></app-loading>
+  }
+  @else{
+  <!-- Categories List -->
+  @if(categories.length > 0){
+  <div class="list-container">
+    @for(category of categories; track category.id) {
+    <!-- <app-task-card [task]="task" (toggle)="toggleTask($event)" (delete)="deleteTask($event)"></app-task-card> -->
+    <ion-card>
+      <ion-card-content>
+        <div class="category-card-content">
+          <div class="category-info">
+            <div class="category-header">
+              <div class="category-dot" [style.background-color]="category.color"></div>
+              <p class="category-title">
+                {{ category.name }}
+              </p>
+            </div>
+            <p class="category-task">
+              <!-- getTaskCountByCategory(category.id) }} tareas -->
+              0 tareas
+            </p>
+          </div>
+          @if(category.id !== 'default') {
+            <div class="category-actions">
+              <ion-button fill="clear" size="small" (click)="editCategory(category)">
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" class="delete-btn" (click)="deleteCategory(category.id)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          }
+        </div>
+      </ion-card-content>
+    </ion-card>
+    }
+  </div>
+  }
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="custom-fab" (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- Modal -->
+  <ion-modal id="formModal" [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ editingCategory ? 'Actualiza Categoria' : 'Nueva Categoria' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <div class="formcontent">
+        <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+          <ion-item>
+            <ion-label position="stacked">Nombre *</ion-label>
+            <ion-input formControlName="name" placeholder="Nombre de la categoria">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <div class="color-section">
+              <ion-label>Color</ion-label>
+              <ion-grid>
+                <ion-row>
+                  @for(color of defaultColors; track color) {
+                  <ion-col size="3">
+                    <div class="color-option" [ngClass]="{'selected': categoryForm.value.color === color}"
+                      [style.background-color]="color" (click)="selectColor(color)">
+                    </div>
+                  </ion-col>
+                  }
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-item>
+        </form>
+      </div>
+      <ion-footer translucent>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button fill="clear" (click)="closeModal()">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button color="primary" [disabled]="categoryForm.invalid" (click)="editingCategory ? updateCategory() : addCategory()">
+              {{ editingCategory ? 'Actualizar' : 'Crear' }}
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+  }
+</ion-content>

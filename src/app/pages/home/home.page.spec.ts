@@ -6,8 +6,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 //Services
 import { TaskService } from 'src/app/services/task.service';
+import { CategoryService } from 'src/app/services/category.service';
 //Model
 import { Task } from 'src/app/models/task.model';
+import { Category } from 'src/app/models/category.model';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -20,6 +22,7 @@ describe('HomePage', () => {
   let tasksSubject: BehaviorSubject<Task[]>;
   let statsSubject: BehaviorSubject<{ completed: number; total: number }>;
 
+  let categoriesSubject: BehaviorSubject<Category[]>;
   // Fecha fija para consistencia en las pruebas
   const fixedDate = new Date(2025, 6, 5, 10, 7, 3);
 
@@ -36,6 +39,15 @@ describe('HomePage', () => {
     ], {
       tasks$: tasksSubject.asObservable()
     });
+    categoriesSubject = new BehaviorSubject<Category[]>([]);
+    //Spy CategoryService
+    const spyC = jasmine.createSpyObj('CategoryService', [
+      'getCategories',
+      'getCategoryById',
+      'categories$'
+    ], {
+      categories$: tasksSubject.asObservable()
+    });
 
     spy.getTaskStats.and.returnValue(of({ completed: 0, total: 0 }));
 
@@ -43,6 +55,7 @@ describe('HomePage', () => {
       imports: [ReactiveFormsModule, HomePage],
       providers: [
         { provide: TaskService, useValue: spy },
+        { provide: CategoryService, useValue: spyC },
         FormBuilder
       ]
     }).compileComponents();
@@ -83,8 +96,8 @@ describe('HomePage', () => {
     // Comprobar que se suscribe al observable de tareas
     //Crear datos mock
     const mockTasks: Task[] = [
-      { id: '1', title: 'Task 1', completed: false, createdAt: fixedDate },
-      { id: '2', title: 'Task 2', completed: false, createdAt: fixedDate }
+      { id: '1', title: 'Task 1', completed: false, createdAt: fixedDate, categoryId: 'default' },
+      { id: '2', title: 'Task 2', completed: false, createdAt: fixedDate, categoryId: 'default' }
     ];
     //Emitir nuevos datos
     tasksSubject.next(mockTasks);

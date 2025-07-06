@@ -1,2 +1,8 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+// Variables principales
+:root {
+    --primary-blue: #2661E9;
+    --primary-blue-dark: #1d4ed8;
+    --primary-gradient: linear-gradient(135deg, #0b4eeb 30%, #4338ca 100%);
+}

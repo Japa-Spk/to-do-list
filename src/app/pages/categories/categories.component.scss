@@ -1,0 +1,73 @@
+.color-section {
+    margin: 24px 0;
+
+    ion-label {
+        font-weight: 500;
+        margin-bottom: 12px;
+        display: block;
+    }
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.2s ease;
+    margin: 0 auto;
+
+    &.selected {
+        border-color: var(--ion-color-dark);
+        transform: scale(1.1);
+    }
+}
+
+.category-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.category-info {
+    flex: 1;
+}
+
+.category-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.25rem 0;
+    transition: all 0.2s ease;
+
+    &.completed {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+}
+
+.category-task {
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.category-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+
+.category-actions {
+    display: flex;
+    gap: 4px;
+}
