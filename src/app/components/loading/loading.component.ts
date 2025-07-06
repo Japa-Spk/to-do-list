@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 // Ionic
 import { IonSpinner, IonIcon, IonText } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -12,7 +12,7 @@ import { sparklesOutline  } from 'ionicons/icons';
   ]
 })
 export class LoadingComponent implements OnInit {
-
+  @Input() message: string = 'Loading...';
   constructor() {
     addIcons({ sparklesOutline });
    }

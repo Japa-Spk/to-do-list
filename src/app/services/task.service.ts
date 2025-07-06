@@ -30,10 +30,11 @@ export class TaskService {
   }
 
   /** Agrega una nueva tarea */
-  async addTask(title: string): Promise<Task> {
+  async addTask(title: string, categoryId: string): Promise<Task> {
     const newTask: Task = {
       id: this.generateId(),
       title,
+      categoryId,
       completed: false,
       createdAt: new Date()
     };
