@@ -18,7 +18,7 @@ import { Category } from 'src/app/models/category.model';
 //Services
 import { TaskService } from 'src/app/services/task.service';
 import { CategoryService } from 'src/app/services/category.service';
-
+import { RemoteConfigService } from 'src/app/services/remote-config.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -44,12 +44,14 @@ export class HomePage implements OnInit, OnDestroy {
   // Categories
   categories: Category[] = []
   selectedCategoryFilter$ = new BehaviorSubject("all");
+  categoriesEnabled = false;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private taskService: TaskService,
     private categoryService: CategoryService,
+    private remoteConfigService: RemoteConfigService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
@@ -62,7 +64,10 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.remoteConfigService.load();
+    this.categoriesEnabled = await this.remoteConfigService.getFeatureFlagValue('enable_categories');
+    console.log('Categories enabled:', this.categoriesEnabled);
     // Carga tareas, estadísticas y categorías
     combineLatest([
       this.taskService.tasks$,

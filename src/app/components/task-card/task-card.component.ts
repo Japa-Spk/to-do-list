@@ -17,6 +17,7 @@ import { Category } from 'src/app/models/category.model';
 export class TaskCardComponent implements OnInit {
   @Input() task: Task = { id: '', title: '', categoryId: 'default', completed: false, createdAt: new Date() };
   @Input() category: Category = { id: 'default', name: 'Sin categoria', color: '#6B7280', createdAt: new Date() };
+  @Input() featureCategory = false;
 
   @Output() toggle = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
