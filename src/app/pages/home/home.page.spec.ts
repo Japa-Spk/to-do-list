@@ -7,6 +7,7 @@ import { BehaviorSubject, of } from 'rxjs';
 //Services
 import { TaskService } from 'src/app/services/task.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { RemoteConfigService } from 'src/app/services/remote-config.service';
 //Model
 import { Task } from 'src/app/models/task.model';
 import { Category } from 'src/app/models/category.model';
@@ -50,12 +51,18 @@ describe('HomePage', () => {
     });
 
     spy.getTaskStats.and.returnValue(of({ completed: 0, total: 0 }));
+    //Spy RemoteConfigService
+    const remoteConfigSpy = jasmine.createSpyObj('RemoteConfigService', [
+      'load',
+      'getFeatureFlagValue'
+    ]);
 
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HomePage],
       providers: [
         { provide: TaskService, useValue: spy },
         { provide: CategoryService, useValue: spyC },
+        { provide: RemoteConfigService, useValue: remoteConfigSpy },
         FormBuilder
       ]
     }).compileComponents();
