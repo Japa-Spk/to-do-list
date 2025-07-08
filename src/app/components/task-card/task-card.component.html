@@ -7,12 +7,14 @@
         </ion-icon>
       </ion-button>
       <div class="task-info">
-        <div class="category-header">
-          <div class="category-dot" [style.background-color]="category.color"></div>
-          <p class="category-title">
-            {{ category.name }}
-          </p>
-        </div>
+        @if(featureCategory){
+          <div class="category-header">
+            <div class="category-dot" [style.background-color]="category.color"></div>
+            <p class="category-title">
+              {{ category.name }}
+            </p>
+          </div>
+        }
         <p class="task-title" [class.completed]="task.completed">
           {{ task.title }}
         </p>
